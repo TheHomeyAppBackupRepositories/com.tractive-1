@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.tractive",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "compatibility": ">=5.0.0",
   "platforms": [
     "local",
@@ -80,17 +80,17 @@
   },
   "homeyCommunityTopicId": 84378,
   "homepage": "https://tractive.com",
-  "support": "mailto:developer@edwinvandepol.nl",
+  "support": "https://community.homey.app/t/84378",
   "flow": {
     "triggers": [
       {
         "title": {
-          "en": "Altitude has changed",
+          "en": "Altitude changed",
           "nl": "Hoogte is veranderd"
         },
         "hint": {
-          "en": "This flowcard is activated when the altitude has changed.",
-          "nl": "Deze kaart wordt geactiveerd wanneer de hoogte veranderd is."
+          "en": "This flowcard is activated when the altitude was changed.",
+          "nl": "Deze kaart wordt geactiveerd wanneer de hoogte veranderd werd."
         },
         "platforms": [
           "local",
@@ -118,7 +118,7 @@
       },
       {
         "title": {
-          "en": "Battery state has changed",
+          "en": "Battery state changed",
           "nl": "Batterijstatus is veranderd"
         },
         "titleFormatted": {
@@ -126,8 +126,8 @@
           "nl": "Batterijstatus is veranderd naar [[battery_state]]"
         },
         "hint": {
-          "en": "This flowcard is activated when the battery state has changed.",
-          "nl": "Deze kaart wordt geactiveerd wanneer de batterijstatus veranderd is."
+          "en": "This flowcard is activated when the battery state was changed.",
+          "nl": "Deze kaart wordt geactiveerd wanneer de batterijstatus veranderd werd."
         },
         "platforms": [
           "local",
@@ -136,11 +136,11 @@
         "args": [
           {
             "type": "dropdown",
+            "name": "battery_state",
             "title": {
               "en": "state",
               "nl": "status"
             },
-            "name": "battery_state",
             "values": [
               {
                 "id": "full",
@@ -233,6 +233,248 @@
       },
       {
         "title": {
+          "en": "Virtual fence changed",
+          "nl": "Virtuele omheining is veranderd"
+        },
+        "titleFormatted": {
+          "en": "Virtual fence has changed to [[geofence]]",
+          "nl": "Virtuele omheining is veranderd naar [[geofence]]"
+        },
+        "hint": {
+          "en": "This flowcard is activated when the virtual fence was changed.",
+          "nl": "Deze kaart wordt geactiveerd wanneer de virtuele omheining veranderd werd."
+        },
+        "platforms": [
+          "local",
+          "cloud"
+        ],
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "geofence",
+            "title": {
+              "en": "name",
+              "nl": "naam"
+            },
+            "placeholder": {
+              "en": "Home",
+              "nl": "Thuis"
+            }
+          },
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=tracker&capabilities=geofence"
+          }
+        ],
+        "id": "geofence_changed"
+      },
+      {
+        "title": {
+          "en": "Danger zone was entered",
+          "nl": "Gevarenzone werd binnengegaan"
+        },
+        "hint": {
+          "en": "This flowcard triggers when a danger zone was entered.",
+          "nl": "Deze kaart wordt geactiveerd wanneer een gevarenzone binnengegaan werd."
+        },
+        "platforms": [
+          "local",
+          "cloud"
+        ],
+        "tokens": [
+          {
+            "type": "string",
+            "name": "geofence",
+            "title": {
+              "en": "Fence",
+              "nl": "Omheining"
+            },
+            "example": {
+              "en": "Home",
+              "nl": "Thuis"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=tracker&capabilities=in_geofence"
+          }
+        ],
+        "id": "in_danger_zone_true"
+      },
+      {
+        "title": {
+          "en": "Virtual fence was left",
+          "nl": "Virtuele omheining werd verlaten"
+        },
+        "hint": {
+          "en": "This flowcard triggers when a virtual fence was left.",
+          "nl": "Deze kaart wordt geactiveerd wanneer een virtuele omheining verlaten werd."
+        },
+        "platforms": [
+          "local",
+          "cloud"
+        ],
+        "tokens": [
+          {
+            "type": "string",
+            "name": "geofence",
+            "title": {
+              "en": "Fence",
+              "nl": "Omheining"
+            },
+            "example": {
+              "en": "Home",
+              "nl": "Thuis"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=tracker&capabilities=in_geofence"
+          }
+        ],
+        "highlight": true,
+        "id": "in_geofence_false"
+      },
+      {
+        "title": {
+          "en": "Virtual fence was entered",
+          "nl": "Virtuele omheining werd binnengegaan"
+        },
+        "hint": {
+          "en": "This flowcard triggers when a virtual fence was entered.",
+          "nl": "Deze kaart wordt geactiveerd wanneer een virtuele omheining binnengegaan werd."
+        },
+        "platforms": [
+          "local",
+          "cloud"
+        ],
+        "tokens": [
+          {
+            "type": "string",
+            "name": "geofence",
+            "title": {
+              "en": "Fence",
+              "nl": "Omheining"
+            },
+            "example": {
+              "en": "Home",
+              "nl": "Thuis"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=tracker&capabilities=in_geofence"
+          }
+        ],
+        "highlight": true,
+        "id": "in_geofence_true"
+      },
+      {
+        "title": {
+          "en": "Power saving zone was left",
+          "nl": "WiFi-zone werd verlaten"
+        },
+        "hint": {
+          "en": "This flowcard triggers when a power saving zone was left.",
+          "nl": "Deze kaart wordt geactiveerd wanneer een WiFi-zone verlaten werd."
+        },
+        "platforms": [
+          "local",
+          "cloud"
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=tracker&capabilities=in_power_saving_zone"
+          }
+        ],
+        "id": "in_power_saving_zone_false"
+      },
+      {
+        "title": {
+          "en": "Power saving zone was entered",
+          "nl": "WiFi-zone werd binnengegaan"
+        },
+        "hint": {
+          "en": "This flowcard triggers when a power saving zone was entered.",
+          "nl": "Deze kaart wordt geactiveerd wanneer een WiFi-zone binnengegaan werd."
+        },
+        "platforms": [
+          "local",
+          "cloud"
+        ],
+        "tokens": [
+          {
+            "type": "string",
+            "name": "power_saving_zone",
+            "title": {
+              "en": "Power saving zone",
+              "nl": "WiFi-zone"
+            },
+            "example": {
+              "en": "WiFi Name",
+              "nl": "WiFi-naam"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=tracker&capabilities=in_power_saving_zone"
+          }
+        ],
+        "id": "in_power_saving_zone_true"
+      },
+      {
+        "title": {
+          "en": "Safe zone was entered",
+          "nl": "Veilige zone werd binnengegaan"
+        },
+        "hint": {
+          "en": "This flowcard triggers when a safe zone was entered.",
+          "nl": "Deze kaart wordt geactiveerd wanneer een veilige zone binnengegaan werd."
+        },
+        "platforms": [
+          "local",
+          "cloud"
+        ],
+        "tokens": [
+          {
+            "type": "string",
+            "name": "geofence",
+            "title": {
+              "en": "Fence",
+              "nl": "Omheining"
+            },
+            "example": {
+              "en": "Home",
+              "nl": "Thuis"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=tracker&capabilities=in_geofence"
+          }
+        ],
+        "id": "in_safe_zone_true"
+      },
+      {
+        "title": {
           "en": "Light was turned off",
           "nl": "Licht werd uitgeschakeld"
         },
@@ -321,12 +563,12 @@
       },
       {
         "title": {
-          "en": "GPS location has changed",
+          "en": "GPS location changed",
           "nl": "GPS-locatie is veranderd"
         },
         "hint": {
-          "en": "This flowcard is activated when the the GPS location has changed.",
-          "nl": "Deze kaart wordt geactiveerd wanneer de GPS-locatie veranderd is."
+          "en": "This flowcard is activated when the the GPS location was changed.",
+          "nl": "Deze kaart wordt geactiveerd wanneer de GPS-locatie veranderd werd."
         },
         "platforms": [
           "local",
@@ -398,19 +640,111 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=tracker"
+            "filter": "driver_id=tracker&capabilities=location_source"
           }
         ],
         "id": "location_changed"
       },
       {
         "title": {
-          "en": "Speed has changed",
+          "en": "Location source changed",
+          "nl": "Locatiebron is veranderd"
+        },
+        "titleFormatted": {
+          "en": "Location source has changed to [[location_source]]",
+          "nl": "Locatiebron is veranderd naar [[location_source]]"
+        },
+        "hint": {
+          "en": "This flowcard is activated when the location source was changed.",
+          "nl": "Deze kaart wordt geactiveerd wanneer de locatiebron veranderd werd."
+        },
+        "platforms": [
+          "local",
+          "cloud"
+        ],
+        "args": [
+          {
+            "type": "dropdown",
+            "name": "location_source",
+            "title": {
+              "en": "source",
+              "nl": "bron"
+            },
+            "values": [
+              {
+                "id": "phone",
+                "title": {
+                  "en": "Bluetooth"
+                }
+              },
+              {
+                "id": "known_wifi",
+                "title": {
+                  "en": "WiFi"
+                }
+              },
+              {
+                "id": "gps",
+                "title": {
+                  "en": "GPS"
+                }
+              }
+            ]
+          },
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=tracker&capabilities=location_source"
+          }
+        ],
+        "id": "location_source_changed"
+      },
+      {
+        "title": {
+          "en": "Power saving zone changed",
+          "nl": "WiFi-zone is veranderd"
+        },
+        "titleFormatted": {
+          "en": "Power saving zone has changed to [[power_saving_zone]]",
+          "nl": "WiFi-zone is veranderd naar [[power_saving_zone]]"
+        },
+        "hint": {
+          "en": "This flowcard is activated when the power saving zone was changed.",
+          "nl": "Deze kaart wordt geactiveerd wanneer de WiFi-zone veranderd werd."
+        },
+        "platforms": [
+          "local",
+          "cloud"
+        ],
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "power_saving_zone",
+            "title": {
+              "en": "name",
+              "nl": "naam"
+            },
+            "placeholder": {
+              "en": "Home",
+              "nl": "Thuis"
+            }
+          },
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=tracker&capabilities=power_saving_zone"
+          }
+        ],
+        "id": "power_saving_zone_changed"
+      },
+      {
+        "title": {
+          "en": "Speed changed",
           "nl": "Snelheid is veranderd"
         },
         "hint": {
-          "en": "This flowcard is activated when the speed has changed.",
-          "nl": "Deze kaart wordt geactiveerd wanneer de snelheid veranderd is."
+          "en": "This flowcard is activated when the speed was changed.",
+          "nl": "Deze kaart wordt geactiveerd wanneer de snelheid veranderd werd."
         },
         "platforms": [
           "local",
@@ -438,7 +772,7 @@
       },
       {
         "title": {
-          "en": "Tracker state has changed",
+          "en": "Tracker state changed",
           "nl": "Trackerstatus is veranderd"
         },
         "titleFormatted": {
@@ -446,8 +780,8 @@
           "nl": "Trackerstatus is veranderd naar [[tracker_state]]"
         },
         "hint": {
-          "en": "This flowcard is activated when the tracker state has changed.",
-          "nl": "Deze kaart wordt geactiveerd wanneer de trackerstatus veranderd is."
+          "en": "This flowcard is activated when the tracker state was changed.",
+          "nl": "Deze kaart wordt geactiveerd wanneer de trackerstatus veranderd werd."
         },
         "platforms": [
           "local",
@@ -456,16 +790,16 @@
         "args": [
           {
             "type": "dropdown",
+            "name": "tracker_state",
             "title": {
               "en": "state",
               "nl": "status"
             },
-            "name": "tracker_state",
             "values": [
               {
                 "id": "power_saving",
                 "title": {
-                  "en": "in Power Saving Zone",
+                  "en": "in power saving zone",
                   "nl": "in WiFi-zone"
                 }
               },
@@ -522,8 +856,8 @@
           "nl": "Batterijstatus !{{is|is niet}}"
         },
         "titleFormatted": {
-          "en": "Battery state !{{is|is not}} equal to [[battery_state]]",
-          "nl": "Batterijstatus !{{is|is niet}} gelijk aan [[battery_state]]"
+          "en": "Battery state !{{is|is not}} [[battery_state]]",
+          "nl": "Batterijstatus !{{is|is niet}} [[battery_state]]"
         },
         "platforms": [
           "local",
@@ -532,11 +866,11 @@
         "args": [
           {
             "type": "dropdown",
+            "name": "battery_state",
             "title": {
               "en": "state",
               "nl": "status"
             },
-            "name": "battery_state",
             "values": [
               {
                 "id": "full",
@@ -621,6 +955,77 @@
       },
       {
         "title": {
+          "en": "Virtual Fence !{{is|is not}}",
+          "nl": "Virtuele omheining !{{is|is niet}}"
+        },
+        "titleFormatted": {
+          "en": "Virtual fence !{{is|is not}} [[geofence]]",
+          "nl": "Virtuele omheining !{{is|is niet}} [[geofence]]"
+        },
+        "platforms": [
+          "local",
+          "cloud"
+        ],
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "geofence",
+            "title": {
+              "en": "name",
+              "nl": "naam"
+            },
+            "placeholder": {
+              "en": "Home",
+              "nl": "Thuis"
+            }
+          },
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=tracker&capabilities=geofence"
+          }
+        ],
+        "id": "geofence"
+      },
+      {
+        "title": {
+          "en": "Is !{{inside|outside}} virtual fence",
+          "nl": "Is !{{binnen|buiten}} virtuele omheining"
+        },
+        "platforms": [
+          "local",
+          "cloud"
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=tracker&capabilities=in_geofence"
+          }
+        ],
+        "highlight": true,
+        "id": "in_geofence"
+      },
+      {
+        "title": {
+          "en": "Is !{{inside|outside}} power saving zone",
+          "nl": "Is !{{binnen|buiten}} WiFi-zone"
+        },
+        "platforms": [
+          "local",
+          "cloud"
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=tracker&capabilities=in_power_saving_zone"
+          }
+        ],
+        "id": "in_power_saving_zone"
+      },
+      {
+        "title": {
           "en": "Light is turned !{{on|off}}",
           "nl": "Licht is !{{in|uit}}geschakeld"
         },
@@ -657,12 +1062,12 @@
       },
       {
         "title": {
-          "en": "Tracker state !{{is|is not}}",
-          "nl": "Trackerstatus !{{is|is niet}}"
+          "en": "Location source !{{is|is not}}",
+          "nl": "Locatiebron !{{is|is niet}}"
         },
         "titleFormatted": {
-          "en": "Tracker state !{{is|is not}} equal to [[tracker_state]]",
-          "nl": "Trackerstatus !{{is|is niet}} gelijk aan [[tracker_state]]"
+          "en": "Location source !{{is|is not}} [[location_source]]",
+          "nl": "Locatiebron !{{is|is niet}} [[location_source]]"
         },
         "platforms": [
           "local",
@@ -671,16 +1076,100 @@
         "args": [
           {
             "type": "dropdown",
+            "name": "location_source",
+            "title": {
+              "en": "source",
+              "nl": "bron"
+            },
+            "values": [
+              {
+                "id": "phone",
+                "title": {
+                  "en": "Bluetooth"
+                }
+              },
+              {
+                "id": "known_wifi",
+                "title": {
+                  "en": "WiFi"
+                }
+              },
+              {
+                "id": "gps",
+                "title": {
+                  "en": "GPS"
+                }
+              }
+            ]
+          },
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=tracker&capabilities=location_source"
+          }
+        ],
+        "id": "location_source"
+      },
+      {
+        "title": {
+          "en": "Power saving zone !{{is|is not}}",
+          "nl": "WiFi-zone !{{is|is niet}}"
+        },
+        "titleFormatted": {
+          "en": "Power saving zone !{{is|is not}} [[power_saving_zone]]",
+          "nl": "WiFi-zone !{{is|is niet}} [[power_saving_zone]]"
+        },
+        "platforms": [
+          "local",
+          "cloud"
+        ],
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "power_saving_zone",
+            "title": {
+              "en": "name",
+              "nl": "naam"
+            },
+            "placeholder": {
+              "en": "Home",
+              "nl": "Thuis"
+            }
+          },
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=tracker&capabilities=power_saving_zone"
+          }
+        ],
+        "id": "power_saving_zone"
+      },
+      {
+        "title": {
+          "en": "Tracker state !{{is|is not}}",
+          "nl": "Trackerstatus !{{is|is niet}}"
+        },
+        "titleFormatted": {
+          "en": "Tracker state !{{is|is not}} [[tracker_state]]",
+          "nl": "Trackerstatus !{{is|is niet}} [[tracker_state]]"
+        },
+        "platforms": [
+          "local",
+          "cloud"
+        ],
+        "args": [
+          {
+            "type": "dropdown",
+            "name": "tracker_state",
             "title": {
               "en": "state",
               "nl": "status"
             },
-            "name": "tracker_state",
             "values": [
               {
                 "id": "power_saving",
                 "title": {
-                  "en": "in Power Saving Zone",
+                  "en": "in power saving zone",
                   "nl": "in WiFi-zone"
                 }
               },
@@ -701,7 +1190,7 @@
               {
                 "id": "no_position",
                 "title": {
-                  "en": "no Location",
+                  "en": "no location",
                   "nl": "geen locatie"
                 }
               },
@@ -715,7 +1204,7 @@
               {
                 "id": "shutdown_by_user",
                 "title": {
-                  "en": "turned Off",
+                  "en": "turned off",
                   "nl": "uitgeschakeld"
                 }
               }
@@ -737,8 +1226,8 @@
           "nl": "Geluid uitschakelen"
         },
         "hint": {
-          "en": "This flowcard will turn off the sound.",
-          "nl": "Deze kaart schakelt het geluid uit."
+          "en": "Use this flowcard to turn off the sound.",
+          "nl": "Gebruik deze kaart om het geluid uit te schakelen."
         },
         "platforms": [
           "local",
@@ -759,8 +1248,8 @@
           "nl": "Geluid inschakelen"
         },
         "hint": {
-          "en": "This flowcard will turn on the sound.",
-          "nl": "Deze kaart schakelt het geluid in."
+          "en": "Use this flowcard to turn on the sound.",
+          "nl": "Gebruik deze kaart om het geluid in te schakelen."
         },
         "platforms": [
           "local",
@@ -781,8 +1270,8 @@
           "nl": "Licht uitschakelen"
         },
         "hint": {
-          "en": "This flowcard will turn off the light.",
-          "nl": "Deze kaart schakelt het licht uit."
+          "en": "Use this flowcard to turn off the light.",
+          "nl": "Gebruik deze kaart om het licht uit te schakelen."
         },
         "platforms": [
           "local",
@@ -803,8 +1292,8 @@
           "nl": "Licht inschakelen"
         },
         "hint": {
-          "en": "This flowcard will turn on the light.",
-          "nl": "Deze kaart schakelt het licht in."
+          "en": "Use this flowcard to turn on the light.",
+          "nl": "Gebruik deze kaart om het licht in te schakelen."
         },
         "platforms": [
           "local",
@@ -825,8 +1314,8 @@
           "nl": "LIVE Tracking stoppen"
         },
         "hint": {
-          "en": "This flowcard will stop LIVE Tracking.",
-          "nl": "Deze kaart stopt LIVE Tracking."
+          "en": "Use this flowcard to stop LIVE Tracking.",
+          "nl": "Gebruik deze kaart om LIVE Tracking te stoppen."
         },
         "platforms": [
           "local",
@@ -847,8 +1336,8 @@
           "nl": "LIVE Tracking starten"
         },
         "hint": {
-          "en": "This flowcard will start LIVE Tracking.",
-          "nl": "Deze kaart start LIVE Tracking."
+          "en": "Use this flowcard to start LIVE Tracking.",
+          "nl": "Gebruik deze kaart om LIVE Tracking te starten."
         },
         "platforms": [
           "local",
@@ -884,8 +1373,13 @@
         "measure_battery",
         "charging_state",
         "battery_state",
-        "buzzer_control",
+        "in_geofence",
+        "in_power_saving_zone",
+        "geofence",
+        "power_saving_zone",
+        "location_source",
         "live_tracking",
+        "buzzer_control",
         "led_control",
         "tracker_state",
         "altitude",
@@ -1107,6 +1601,56 @@
         "nl": "Opgeladen"
       }
     },
+    "geofence": {
+      "type": "string",
+      "title": {
+        "en": "Virtual Fence",
+        "nl": "Virtuele omheining"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": null
+    },
+    "in_geofence": {
+      "type": "boolean",
+      "title": {
+        "en": "In Virtual Fence",
+        "nl": "In virtuele omheining"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/geofence.svg",
+      "insightsTitleTrue": {
+        "en": "Entered Virtual Fence",
+        "nl": "Virtuele omheining binnengegaan"
+      },
+      "insightsTitleFalse": {
+        "en": "Left Virtual Fence",
+        "nl": "Virtuele omheining verlaten"
+      }
+    },
+    "in_power_saving_zone": {
+      "type": "boolean",
+      "title": {
+        "en": "In Power Saving Zone",
+        "nl": "In WiFi-zone"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/in_power_saving_zone.svg",
+      "insightsTitleTrue": {
+        "en": "Entered power saving zone",
+        "nl": "WiFi-zone binnengegaan"
+      },
+      "insightsTitleFalse": {
+        "en": "Left power saving zone",
+        "nl": "WiFi-zone verlaten"
+      }
+    },
     "latitude": {
       "type": "number",
       "title": {
@@ -1157,6 +1701,37 @@
         "nl": "LIVE Tracking gestopt"
       }
     },
+    "location_source": {
+      "type": "enum",
+      "title": {
+        "en": "Location Source",
+        "nl": "Locatiebron"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/location_source.svg",
+      "values": [
+        {
+          "id": "phone",
+          "title": {
+            "en": "Bluetooth"
+          }
+        },
+        {
+          "id": "known_wifi",
+          "title": {
+            "en": "WiFi"
+          }
+        },
+        {
+          "id": "gps",
+          "title": {
+            "en": "GPS"
+          }
+        }
+      ]
+    },
     "longitude": {
       "type": "number",
       "title": {
@@ -1167,6 +1742,16 @@
       "setable": false,
       "uiComponent": null,
       "decimals": 6
+    },
+    "power_saving_zone": {
+      "type": "string",
+      "title": {
+        "en": "Power Saving Zone",
+        "nl": "WiFi-zone"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": null
     },
     "speed": {
       "type": "number",

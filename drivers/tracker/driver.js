@@ -1,6 +1,7 @@
 'use strict';
 
 const Driver = require('../../lib/Driver');
+const { TrackerCapabilities } = require('../../lib/Enums');
 
 class TrackerDriver extends Driver {
 
@@ -10,9 +11,14 @@ class TrackerDriver extends Driver {
 
   // Driver initialized
   async onOAuth2Init() {
-    this.locationTrigger = this.homey.flow.getDeviceTriggerCard('location_changed');
+    this.locationChangedTrigger = this.homey.flow.getDeviceTriggerCard('location_changed');
+    this.inDangerZoneTrueTrigger = this.homey.flow.getDeviceTriggerCard('in_danger_zone_true');
+    this.inGeofenceFalseTrigger = this.homey.flow.getDeviceTriggerCard('in_geofence_false');
+    this.inGeofenceTrueTrigger = this.homey.flow.getDeviceTriggerCard('in_geofence_true');
+    this.inPowerSavingZoneTrueTrigger = this.homey.flow.getDeviceTriggerCard('in_power_saving_zone_true');
+    this.inSafeZoneTrueTrigger = this.homey.flow.getDeviceTriggerCard('in_safe_zone_true');
 
-    super.onOAuth2Init().catch(this.error);
+    await super.onOAuth2Init();
   }
 
   /*
@@ -31,15 +37,19 @@ class TrackerDriver extends Driver {
       'tracker_state',
       'charging_state',
       'battery_state',
+      'in_geofence',
+      'geofence',
     ];
 
-    for (const name of device.capabilities) {
-      if (name === 'BUZZER') caps.push('buzzer_control');
-      if (name === 'LED') caps.push('led_control');
-      if (name === 'LT') caps.push('live_tracking');
+    for (const [name, capabilities] of Object.entries(TrackerCapabilities)) {
+      if (device.capabilities.includes(name)) {
+        for (const capability of capabilities) {
+          caps.push(capability);
+        }
+      }
     }
 
-    caps.push('altitude', 'speed', 'latitude', 'longitude');
+    caps.push('location_source', 'altitude', 'speed', 'latitude', 'longitude');
 
     return caps;
   }
@@ -57,7 +67,6 @@ class TrackerDriver extends Driver {
     return {
       tracker_id: device._id || null,
       pet_id: device.pet._id || null,
-      user_id: device.user._id || null,
       subscription_id: device.subscription._id || null,
     };
   }
